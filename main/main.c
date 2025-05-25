@@ -7,35 +7,13 @@
 #include <inttypes.h>
 #include <stdio.h>
 
-#include "driver/gpio.h"
-#include "driver/uart.h"
 #include "esp_log.h"
-#include "esp_netif.h"
-#include "esp_wifi.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/event_groups.h"
 #include "freertos/task.h"
-#include "lwip/err.h"
-#include "lwip/sys.h"
 #include "nvs_flash.h"
-#include "tcp/tcp.h"
-#include "wifi/wifi.h"
-
-void init_gpio() {
-    uint64_t bitmask = 0;
-    bitmask |= (1ULL << GPIO_NUM_2);
-
-    // Init gpio for debug
-    gpio_config_t gpio = {
-        .pin_bit_mask = bitmask,
-        .mode = GPIO_MODE_OUTPUT,
-        .pull_up_en = GPIO_PULLUP_DISABLE,
-        .pull_down_en = GPIO_PULLDOWN_DISABLE,
-        .intr_type = GPIO_INTR_DISABLE,
-    };
-
-    gpio_config(&gpio);
-}
+#include "tcp.h"
+#include "wifi.h"
 
 void init() {
     // Init Flash storage, apperently needed for Wifi to work
@@ -46,7 +24,7 @@ void init() {
     }
     ESP_ERROR_CHECK(ret);
 
-    // Init WiFI
+    // Init WiFi
     init_wifi();
 }
 

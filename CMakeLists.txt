@@ -6,4 +6,4 @@ endif()
 
 include(/home/connor/Documents/Projects/esp32/esp-idf/tools/cmake/project.cmake)
  
-project(timed_lock)
+project(Controller)
